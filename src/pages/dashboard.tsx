@@ -2,9 +2,10 @@ import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import dynamic from "next/dynamic";
+import { ApexOptions } from "apexcharts";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const options = {
+const options: ApexOptions = {
   chart: {
     toolbar: {
       show: false,
@@ -40,14 +41,15 @@ const options = {
       "2021-03-23T00:00:00.000Z",
     ],
   },
-  fill: { opacity: 0.3, 
+  fill: {
+    opacity: 0.3,
     type: "gradient",
     gradient: {
-      shade: 'dark',
+      shade: "dark",
       opacityFrom: 0.7,
       opacityTo: 0.3,
-    }
-   },
+    },
+  },
 };
 
 const series = [{ name: "series1", data: [31, 120, 10, 28, 61, 18, 109] }];
