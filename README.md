@@ -20,6 +20,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - NextJs
 - TypeScript
 - ChakraUi
+- MirageJs
+- Faker
 
 <!-- ## 💻 Projeto -->
 ## Sobre o Projeto
