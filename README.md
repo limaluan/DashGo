@@ -21,6 +21,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - TypeScript
 - ChakraUi
 - MirageJs
+- React Query
 - Faker
 
 <!-- ## 💻 Projeto -->
