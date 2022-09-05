@@ -28,25 +28,29 @@ export default function UserList() {
     base: false,
     lg: true,
   });
-  const { data, isLoading, error } = useQuery("users", async () => {
-    const response = await fetch("https://localhost:3000/api/users");
-    const data = await response.json();
+  const { data, isLoading, isFetching, error } = useQuery(
+    "users",
+    async () => {
+      const response = await fetch("https://localhost:3000/api/users");
+      const data = await response.json();
 
-    const users = data.users.map((user: any) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        createdAt: new Date(user.createdAt).toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        }),
-      };
-    });
+      const users = data.users.map((user: any) => {
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          createdAt: new Date(user.createdAt).toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }),
+        };
+      });
 
-    return users;
-  });
+      return users;
+    },
+    { staleTime: 5000 }
+  );
 
   return (
     <Box>
@@ -59,6 +63,7 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
               Usuários
+              {!isLoading && isFetching && <Spinner />}
             </Heading>
             <Link href="/users/create" passHref>
               <Button
