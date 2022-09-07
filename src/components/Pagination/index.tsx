@@ -20,9 +20,9 @@ function generatePagesArray(from: number, to: number) {
 
 export default function Pagination({
   totalCountsOfRegisters,
-  onPageChange,
-  currentPage = 1,
   registersPerPage = 10,
+  currentPage = 1,
+  onPageChange,
 }: IPaginationProps) {
   const lastPage = Math.ceil(totalCountsOfRegisters / registersPerPage);
 
@@ -48,12 +48,12 @@ export default function Pagination({
       spacing="6"
     >
       <Box>
-        <strong>0</strong> - <strong>10</strong> de <strong>100</strong>
+        <strong>0</strong> - <strong>10</strong> de <strong>{totalCountsOfRegisters}</strong>
       </Box>
       <HStack spacing="2">
         {currentPage > 1 + siblingCount && (
           <>
-            <PaginationItem number={1} />
+            <PaginationItem onPageChange={onPageChange} number={1} />
             {currentPage > 2 + siblingCount && (
               <Text color="gray.300" width="8" textAlign="center">
                 ...
@@ -64,14 +64,14 @@ export default function Pagination({
 
         {previousPages.length > 0 &&
           previousPages.map((page) => {
-            return <PaginationItem key={page} number={page} />;
+            return <PaginationItem onPageChange={onPageChange} key={page} number={page} />;
           })}
 
-        <PaginationItem number={currentPage} isCurrent />
+        <PaginationItem onPageChange={onPageChange} number={currentPage} isCurrent />
 
         {nextPages.length > 0 &&
           nextPages.map((page) => {
-            return <PaginationItem key={page} number={page} />;
+            return <PaginationItem onPageChange={onPageChange} key={page} number={page} />;
           })}
 
         {currentPage + siblingCount < lastPage && (
@@ -81,7 +81,7 @@ export default function Pagination({
                 ...
               </Text>
             )}
-            <PaginationItem number={lastPage} />
+            <PaginationItem onPageChange={onPageChange} number={lastPage} />
           </>
         )}
       </HStack>
